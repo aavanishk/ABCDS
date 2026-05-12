@@ -1,213 +1,79 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<!-- GENERATE REPORT BUTTON -->
+<div class="mt-6 flex gap-4">
 
-<title>Fall of Potential Method</title>
+  <button
+    onclick="generateReport()"
+    class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-xl font-semibold"
+  >
+    Generate Report
+  </button>
 
-<script src="https://cdn.tailwindcss.com"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</div>
 
-<style>
-  body{
-    font-family: Inter, sans-serif;
-    background:#F1F5F9;
-  }
+<!-- REPORT SECTION -->
+<div id="reportSection" class="card p-6 mt-6 hidden">
 
-  .card{
-    background:white;
-    border-radius:18px;
-    box-shadow:0 4px 12px rgba(0,0,0,0.08);
-  }
+  <div class="flex justify-between items-center mb-6">
 
-  table{
-    width:100%;
-    border-collapse:collapse;
-  }
+    <h2 class="text-2xl font-bold text-yellow-500">
+      Generated Report
+    </h2>
 
-  th{
-    background:#FACC15;
-    padding:12px;
-    text-align:left;
-  }
-
-  td{
-    border-bottom:1px solid #E2E8F0;
-    padding:10px;
-  }
-
-  input{
-    width:100%;
-    border:1px solid #CBD5E1;
-    padding:8px;
-    border-radius:8px;
-  }
-</style>
-
-</head>
-
-<body>
-
-<div class="p-8">
-
-  <!-- HEADER -->
-  <div class="card bg-slate-900 text-white p-6 mb-6">
-
-    <h1 class="text-3xl font-bold">
-      Fall of Potential Method
-    </h1>
-
-    <p class="text-slate-300 mt-2">
-      Earth Resistance of a Single Electrode
-    </p>
+    <div class="bg-green-100 text-green-700 px-4 py-2 rounded-xl font-bold">
+      REPORT READY
+    </div>
 
   </div>
 
-  <div class="grid grid-cols-12 gap-6">
+  <!-- REPORT DETAILS -->
+  <div class="grid grid-cols-3 gap-6 mb-6">
 
-    <!-- LEFT PANEL -->
-    <div class="col-span-3 space-y-6">
+    <div class="bg-slate-50 rounded-xl p-4">
 
-      <!-- SITE INFO -->
-      <div class="card p-5">
+      <p class="text-gray-500 text-sm">
+        Average Resistance
+      </p>
 
-        <h2 class="text-xl font-bold text-yellow-500 mb-4">
-          Site Information
-        </h2>
-
-        <div class="space-y-4">
-
-          <input id="project" placeholder="Project Name"/>
-          <input id="location" placeholder="Location"/>
-          <input id="instrument" placeholder="Instrument"/>
-
-          <input id="distanceInput" type="number" placeholder="Distance Between Electrodes"/>
-
-          <input id="accuracyInput" type="number" placeholder="Desired Accuracy (%)"/>
-
-        </div>
-
-      </div>
-
-      <!-- REPORT -->
-      <div class="card p-5">
-
-        <h2 class="text-xl font-bold text-yellow-500 mb-4">
-          Generated Report
-        </h2>
-
-        <div class="space-y-3 text-sm">
-
-          <div class="flex justify-between">
-            <span>Average Resistance</span>
-            <span id="avgResistance" class="font-bold text-blue-700">
-              0 Ω
-            </span>
-          </div>
-
-          <div class="flex justify-between">
-            <span>Final Resistance</span>
-            <span id="finalResistance" class="font-bold text-blue-700">
-              0 Ω
-            </span>
-          </div>
-
-          <div class="flex justify-between">
-            <span>Status</span>
-
-            <span id="status" class="font-bold text-green-600">
-              --
-            </span>
-          </div>
-
-        </div>
-
-      </div>
+      <h3 id="avgResistance" class="text-3xl font-bold text-blue-700 mt-2">
+        0 Ω
+      </h3>
 
     </div>
 
-    <!-- CENTER PANEL -->
-    <div class="col-span-9 space-y-6">
+    <div class="bg-slate-50 rounded-xl p-4">
 
-      <!-- READING TABLE -->
-      <div class="card p-5">
+      <p class="text-gray-500 text-sm">
+        Final Resistance
+      </p>
 
-        <div class="flex justify-between items-center mb-5">
-
-          <h2 class="text-2xl font-bold text-yellow-500">
-            Reading Table
-          </h2>
-
-          <button
-            onclick="addRow()"
-            class="bg-blue-600 text-white px-5 py-2 rounded-xl"
-          >
-            Add Row
-          </button>
-
-        </div>
-
-        <table id="readingTable">
-
-          <thead>
-            <tr>
-              <th>Probe Distance (m)</th>
-              <th>Voltage (V)</th>
-              <th>Current (A)</th>
-              <th>Resistance (Ω)</th>
-            </tr>
-          </thead>
-
-          <tbody id="tableBody">
-
-            <tr>
-              <td><input type="number" value="50"></td>
-              <td><input type="number" value="440"></td>
-              <td><input type="number" value="10"></td>
-              <td class="font-bold text-blue-700 resistanceCell">
-                44
-              </td>
-            </tr>
-
-            <tr>
-              <td><input type="number" value="100"></td>
-              <td><input type="number" value="460"></td>
-              <td><input type="number" value="10"></td>
-              <td class="font-bold text-blue-700 resistanceCell">
-                46
-              </td>
-            </tr>
-
-          </tbody>
-
-        </table>
-
-        <div class="mt-6">
-
-          <button
-            onclick="generateReport()"
-            class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-xl"
-          >
-            Generate Report
-          </button>
-
-        </div>
-
-      </div>
-
-      <!-- GRAPH -->
-      <div class="card p-5">
-
-        <h2 class="text-2xl font-bold text-yellow-500 mb-5">
-          Resistance Graph
-        </h2>
-
-        <canvas id="chartCanvas"></canvas>
-
-      </div>
+      <h3 id="finalResistance" class="text-3xl font-bold text-blue-700 mt-2">
+        0 Ω
+      </h3>
 
     </div>
+
+    <div class="bg-slate-50 rounded-xl p-4">
+
+      <p class="text-gray-500 text-sm">
+        Test Status
+      </p>
+
+      <h3 id="status" class="text-3xl font-bold text-green-600 mt-2">
+        PASS
+      </h3>
+
+    </div>
+
+  </div>
+
+  <!-- GRAPH -->
+  <div class="bg-white rounded-2xl border p-5">
+
+    <h2 class="text-xl font-bold text-yellow-500 mb-4">
+      Resistance Visualization
+    </h2>
+
+    <canvas id="chartCanvas"></canvas>
 
   </div>
 
@@ -217,25 +83,10 @@
 
 let chart;
 
-function addRow(){
-
-  const tbody = document.getElementById('tableBody');
-
-  const row = document.createElement('tr');
-
-  row.innerHTML = `
-    <td><input type="number"></td>
-    <td><input type="number"></td>
-    <td><input type="number"></td>
-    <td class="font-bold text-blue-700 resistanceCell">0</td>
-  `;
-
-  tbody.appendChild(row);
-}
-
 function generateReport(){
 
-  const rows = document.querySelectorAll('#tableBody tr');
+  const rows =
+    document.querySelectorAll('#tableBody tr');
 
   let labels = [];
   let resistanceData = [];
@@ -244,13 +95,20 @@ function generateReport(){
 
   rows.forEach(row => {
 
-    const inputs = row.querySelectorAll('input');
+    const inputs =
+      row.querySelectorAll('input');
 
-    const distance = parseFloat(inputs[0].value) || 0;
-    const voltage = parseFloat(inputs[1].value) || 0;
-    const current = parseFloat(inputs[2].value) || 1;
+    const distance =
+      parseFloat(inputs[0].value) || 0;
 
-    const resistance = voltage / current;
+    const voltage =
+      parseFloat(inputs[1].value) || 0;
+
+    const current =
+      parseFloat(inputs[2].value) || 1;
+
+    const resistance =
+      voltage / current;
 
     row.querySelector('.resistanceCell').innerText =
       resistance.toFixed(2);
@@ -266,16 +124,28 @@ function generateReport(){
   const avgResistance =
     totalResistance / rows.length;
 
-  document.getElementById('avgResistance').innerText =
-    avgResistance.toFixed(2) + ' Ω';
+  const finalResistance =
+    Math.max(...resistanceData);
 
-  document.getElementById('finalResistance').innerText =
-    Math.max(...resistanceData) + ' Ω';
+  // SHOW REPORT SECTION
+  document.getElementById('reportSection')
+    .classList.remove('hidden');
 
-  document.getElementById('status').innerText =
-    'PASS';
+  // UPDATE REPORT VALUES
+  document.getElementById('avgResistance')
+    .innerText =
+      avgResistance.toFixed(2) + ' Ω';
+
+  document.getElementById('finalResistance')
+    .innerText =
+      finalResistance + ' Ω';
+
+  document.getElementById('status')
+    .innerText =
+      'PASS';
 
   renderChart(labels, resistanceData);
+
 }
 
 function renderChart(labels, data){
@@ -352,9 +222,4 @@ function renderChart(labels, data){
 
 }
 
-generateReport();
-
 </script>
-
-</body>
-</html>
