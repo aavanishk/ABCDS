@@ -4,35 +4,44 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-<title>Fall of Potential Method Dashboard</title>
+<title>Fall of Potential Method</title>
 
-<!-- Tailwind CSS -->
 <script src="https://cdn.tailwindcss.com"></script>
-
-<!-- Chart.js -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <style>
-  body {
+  body{
     font-family: Inter, sans-serif;
-    background: #F1F5F9;
+    background:#F1F5F9;
   }
 
-  .card {
-    background: white;
-    border-radius: 18px;
-    box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+  .card{
+    background:white;
+    border-radius:18px;
+    box-shadow:0 4px 12px rgba(0,0,0,0.08);
   }
 
-  .table-header {
-    background: #FACC15;
-    color: #111827;
-    font-weight: bold;
+  table{
+    width:100%;
+    border-collapse:collapse;
   }
 
-  .value {
-    color: #1D4ED8;
-    font-weight: bold;
+  th{
+    background:#FACC15;
+    padding:12px;
+    text-align:left;
+  }
+
+  td{
+    border-bottom:1px solid #E2E8F0;
+    padding:10px;
+  }
+
+  input{
+    width:100%;
+    border:1px solid #CBD5E1;
+    padding:8px;
+    border-radius:8px;
   }
 </style>
 
@@ -43,167 +52,72 @@
 <div class="p-8">
 
   <!-- HEADER -->
-  <div class="card bg-slate-900 text-white p-8 mb-6">
+  <div class="card bg-slate-900 text-white p-6 mb-6">
 
-    <h1 class="text-4xl font-bold">
+    <h1 class="text-3xl font-bold">
       Fall of Potential Method
     </h1>
 
-    <p class="text-slate-300 mt-2 text-lg">
+    <p class="text-slate-300 mt-2">
       Earth Resistance of a Single Electrode
     </p>
 
   </div>
 
-  <!-- MAIN GRID -->
   <div class="grid grid-cols-12 gap-6">
 
     <!-- LEFT PANEL -->
     <div class="col-span-3 space-y-6">
 
-      <!-- SITE INFORMATION -->
+      <!-- SITE INFO -->
       <div class="card p-5">
 
-        <h2 class="text-xl font-bold text-yellow-500 mb-5">
+        <h2 class="text-xl font-bold text-yellow-500 mb-4">
           Site Information
         </h2>
 
         <div class="space-y-4">
 
-          <div>
-            <label class="text-sm text-gray-500">
-              Project Name
-            </label>
+          <input id="project" placeholder="Project Name"/>
+          <input id="location" placeholder="Location"/>
+          <input id="instrument" placeholder="Instrument"/>
 
-            <input
-              type="text"
-              placeholder="Enter project name"
-              class="w-full border rounded-xl p-3 mt-1"
-            />
-          </div>
+          <input id="distanceInput" type="number" placeholder="Distance Between Electrodes"/>
 
-          <div>
-            <label class="text-sm text-gray-500">
-              Location
-            </label>
-
-            <input
-              type="text"
-              placeholder="Enter location"
-              class="w-full border rounded-xl p-3 mt-1"
-            />
-          </div>
-
-          <div>
-            <label class="text-sm text-gray-500">
-              Date
-            </label>
-
-            <input
-              type="date"
-              class="w-full border rounded-xl p-3 mt-1"
-            />
-          </div>
-
-          <div>
-            <label class="text-sm text-gray-500">
-              Instrument
-            </label>
-
-            <input
-              type="text"
-              value="Megger DET4TD2"
-              class="w-full border rounded-xl p-3 mt-1"
-            />
-          </div>
+          <input id="accuracyInput" type="number" placeholder="Desired Accuracy (%)"/>
 
         </div>
 
       </div>
 
-      <!-- UNIVERSAL INPUT -->
+      <!-- REPORT -->
       <div class="card p-5">
 
-        <h2 class="text-xl font-bold text-yellow-500 mb-5">
-          Universal Input
+        <h2 class="text-xl font-bold text-yellow-500 mb-4">
+          Generated Report
         </h2>
 
-        <div class="space-y-4">
-
-          <div>
-            <label class="text-sm text-gray-500">
-              Distance Between Electrodes
-            </label>
-
-            <input
-              type="number"
-              value="660"
-              class="w-full border rounded-xl p-3 mt-1"
-            />
-          </div>
-
-          <div>
-            <label class="text-sm text-gray-500">
-              Desired Accuracy (%)
-            </label>
-
-            <input
-              type="number"
-              value="2"
-              class="w-full border rounded-xl p-3 mt-1"
-            />
-          </div>
-
-        </div>
-
-      </div>
-
-      <!-- 62% CHECK -->
-      <div class="card p-5">
-
-        <h2 class="text-xl font-bold text-yellow-500 mb-5">
-          62% Check
-        </h2>
-
-        <div class="space-y-4">
+        <div class="space-y-3 text-sm">
 
           <div class="flex justify-between">
-            <span class="text-gray-500">
-              Distance
-            </span>
-
-            <span class="value">
-              409.2 m
+            <span>Average Resistance</span>
+            <span id="avgResistance" class="font-bold text-blue-700">
+              0 Ω
             </span>
           </div>
 
           <div class="flex justify-between">
-            <span class="text-gray-500">
-              Closest Resistance
-            </span>
-
-            <span class="value">
-              60 Ω
+            <span>Final Resistance</span>
+            <span id="finalResistance" class="font-bold text-blue-700">
+              0 Ω
             </span>
           </div>
 
           <div class="flex justify-between">
-            <span class="text-gray-500">
-              Equivalent Resistance
-            </span>
+            <span>Status</span>
 
-            <span class="value">
-              61.288 Ω
-            </span>
-          </div>
-
-          <div class="flex justify-between items-center">
-            <span class="text-gray-500">
-              Status
-            </span>
-
-            <span class="bg-green-100 text-green-700 px-4 py-1 rounded-full font-bold text-sm">
-              PASS
+            <span id="status" class="font-bold text-green-600">
+              --
             </span>
           </div>
 
@@ -214,7 +128,7 @@
     </div>
 
     <!-- CENTER PANEL -->
-    <div class="col-span-6 space-y-6">
+    <div class="col-span-9 space-y-6">
 
       <!-- READING TABLE -->
       <div class="card p-5">
@@ -225,206 +139,71 @@
             Reading Table
           </h2>
 
-          <button class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-xl">
-            Export
+          <button
+            onclick="addRow()"
+            class="bg-blue-600 text-white px-5 py-2 rounded-xl"
+          >
+            Add Row
           </button>
 
         </div>
 
-        <table class="w-full border-collapse overflow-hidden rounded-xl">
+        <table id="readingTable">
 
           <thead>
-
-            <tr class="table-header">
-              <th class="p-4 text-left">Distance</th>
-              <th class="p-4 text-left">Voltage</th>
-              <th class="p-4 text-left">Current</th>
-              <th class="p-4 text-left">Resistance</th>
+            <tr>
+              <th>Probe Distance (m)</th>
+              <th>Voltage (V)</th>
+              <th>Current (A)</th>
+              <th>Resistance (Ω)</th>
             </tr>
-
           </thead>
 
-          <tbody>
+          <tbody id="tableBody">
 
-            <tr class="border-b">
-              <td class="p-4">50 m</td>
-              <td class="p-4">440 V</td>
-              <td class="p-4">10 A</td>
-              <td class="p-4 font-bold text-blue-700">44 Ω</td>
+            <tr>
+              <td><input type="number" value="50"></td>
+              <td><input type="number" value="440"></td>
+              <td><input type="number" value="10"></td>
+              <td class="font-bold text-blue-700 resistanceCell">
+                44
+              </td>
             </tr>
 
-            <tr class="border-b bg-slate-50">
-              <td class="p-4">100 m</td>
-              <td class="p-4">460 V</td>
-              <td class="p-4">10 A</td>
-              <td class="p-4 font-bold text-blue-700">46 Ω</td>
-            </tr>
-
-            <tr class="border-b">
-              <td class="p-4">150 m</td>
-              <td class="p-4">490 V</td>
-              <td class="p-4">10 A</td>
-              <td class="p-4 font-bold text-blue-700">49 Ω</td>
-            </tr>
-
-            <tr class="border-b bg-slate-50">
-              <td class="p-4">200 m</td>
-              <td class="p-4">520 V</td>
-              <td class="p-4">10 A</td>
-              <td class="p-4 font-bold text-blue-700">52 Ω</td>
-            </tr>
-
-            <tr class="border-b">
-              <td class="p-4">250 m</td>
-              <td class="p-4">540 V</td>
-              <td class="p-4">10 A</td>
-              <td class="p-4 font-bold text-blue-700">54 Ω</td>
-            </tr>
-
-            <tr class="border-b bg-slate-50">
-              <td class="p-4">300 m</td>
-              <td class="p-4">560 V</td>
-              <td class="p-4">10 A</td>
-              <td class="p-4 font-bold text-blue-700">56 Ω</td>
-            </tr>
-
-            <tr class="border-b">
-              <td class="p-4">350 m</td>
-              <td class="p-4">575 V</td>
-              <td class="p-4">10 A</td>
-              <td class="p-4 font-bold text-blue-700">57.5 Ω</td>
-            </tr>
-
-            <tr class="border-b bg-slate-50">
-              <td class="p-4">400 m</td>
-              <td class="p-4">600 V</td>
-              <td class="p-4">10 A</td>
-              <td class="p-4 font-bold text-blue-700">60 Ω</td>
-            </tr>
-
-            <tr class="border-b">
-              <td class="p-4">450 m</td>
-              <td class="p-4">670 V</td>
-              <td class="p-4">10 A</td>
-              <td class="p-4 font-bold text-blue-700">67 Ω</td>
+            <tr>
+              <td><input type="number" value="100"></td>
+              <td><input type="number" value="460"></td>
+              <td><input type="number" value="10"></td>
+              <td class="font-bold text-blue-700 resistanceCell">
+                46
+              </td>
             </tr>
 
           </tbody>
 
         </table>
 
+        <div class="mt-6">
+
+          <button
+            onclick="generateReport()"
+            class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-xl"
+          >
+            Generate Report
+          </button>
+
+        </div>
+
       </div>
 
       <!-- GRAPH -->
       <div class="card p-5">
 
-        <div class="flex justify-between items-center mb-5">
-
-          <h2 class="text-2xl font-bold text-yellow-500">
-            Resistance in Ohm
-          </h2>
-
-          <div class="bg-blue-100 text-blue-700 px-4 py-2 rounded-xl text-sm font-semibold">
-            Live Visualization
-          </div>
-
-        </div>
-
-        <div class="bg-slate-50 rounded-2xl p-4 border border-slate-200">
-
-          <canvas id="resistanceChart" height="120"></canvas>
-
-        </div>
-
-      </div>
-
-    </div>
-
-    <!-- RIGHT PANEL -->
-    <div class="col-span-3 space-y-6">
-
-      <!-- SIMPLIFIED TEST -->
-      <div class="card p-5">
-
-        <h2 class="text-xl font-bold text-yellow-500 mb-5">
-          Simplified Potential Test
+        <h2 class="text-2xl font-bold text-yellow-500 mb-5">
+          Resistance Graph
         </h2>
 
-        <div class="space-y-4">
-
-          <div class="flex justify-between">
-            <span>R1</span>
-            <span class="value">56 Ω</span>
-          </div>
-
-          <div class="flex justify-between">
-            <span>R2</span>
-            <span class="value">54 Ω</span>
-          </div>
-
-          <div class="flex justify-between">
-            <span>R3</span>
-            <span class="value">60 Ω</span>
-          </div>
-
-          <div class="flex justify-between">
-            <span>Average RA</span>
-            <span class="value">56.66 Ω</span>
-          </div>
-
-        </div>
-
-        <div class="border-t mt-6 pt-6">
-
-          <div class="text-center">
-
-            <p class="text-gray-500">
-              Final Resistance
-            </p>
-
-            <h1 class="text-5xl font-bold text-blue-700 mt-2">
-              60 Ω
-            </h1>
-
-          </div>
-
-        </div>
-
-      </div>
-
-      <!-- OUTPUT -->
-      <div class="card p-5">
-
-        <h2 class="text-xl font-bold text-yellow-500 mb-5">
-          Output Deviation
-        </h2>
-
-        <div class="space-y-4 text-sm">
-
-          <div class="flex justify-between">
-            <span>R1 Deviation</span>
-            <span>0.0117</span>
-          </div>
-
-          <div class="flex justify-between">
-            <span>R2 Deviation</span>
-            <span>0.0470</span>
-          </div>
-
-          <div class="flex justify-between">
-            <span>R3 Deviation</span>
-            <span>0.0588</span>
-          </div>
-
-          <div class="flex justify-between font-bold border-t pt-4">
-            <span>Accuracy</span>
-
-            <span class="text-green-600">
-              PASS
-            </span>
-          </div>
-
-        </div>
+        <canvas id="chartCanvas"></canvas>
 
       </div>
 
@@ -434,102 +213,146 @@
 
 </div>
 
-<!-- CHART SCRIPT -->
 <script>
 
-const ctx = document.getElementById('resistanceChart');
+let chart;
 
-new Chart(ctx, {
+function addRow(){
 
-    type: 'line',
+  const tbody = document.getElementById('tableBody');
 
-    data: {
+  const row = document.createElement('tr');
 
-        labels: [
-            '50m',
-            '100m',
-            '150m',
-            '200m',
-            '250m',
-            '300m',
-            '350m',
-            '400m',
-            '450m'
-        ],
+  row.innerHTML = `
+    <td><input type="number"></td>
+    <td><input type="number"></td>
+    <td><input type="number"></td>
+    <td class="font-bold text-blue-700 resistanceCell">0</td>
+  `;
 
-        datasets: [{
+  tbody.appendChild(row);
+}
 
-            label: 'Resistance (Ohm)',
+function generateReport(){
 
-            data: [
-                44,
-                46,
-                49,
-                52,
-                54,
-                56,
-                57.5,
-                60,
-                67
-            ],
+  const rows = document.querySelectorAll('#tableBody tr');
 
-            borderColor: '#2563EB',
+  let labels = [];
+  let resistanceData = [];
 
-            backgroundColor: 'rgba(37,99,235,0.15)',
+  let totalResistance = 0;
 
-            fill: true,
+  rows.forEach(row => {
 
-            tension: 0.4,
+    const inputs = row.querySelectorAll('input');
 
-            pointBackgroundColor: '#1D4ED8',
+    const distance = parseFloat(inputs[0].value) || 0;
+    const voltage = parseFloat(inputs[1].value) || 0;
+    const current = parseFloat(inputs[2].value) || 1;
 
-            pointBorderColor: '#ffffff',
+    const resistance = voltage / current;
 
-            pointRadius: 5,
+    row.querySelector('.resistanceCell').innerText =
+      resistance.toFixed(2);
 
-            borderWidth: 3
+    labels.push(distance + 'm');
 
-        }]
+    resistanceData.push(resistance.toFixed(2));
+
+    totalResistance += resistance;
+
+  });
+
+  const avgResistance =
+    totalResistance / rows.length;
+
+  document.getElementById('avgResistance').innerText =
+    avgResistance.toFixed(2) + ' Ω';
+
+  document.getElementById('finalResistance').innerText =
+    Math.max(...resistanceData) + ' Ω';
+
+  document.getElementById('status').innerText =
+    'PASS';
+
+  renderChart(labels, resistanceData);
+}
+
+function renderChart(labels, data){
+
+  const ctx =
+    document.getElementById('chartCanvas');
+
+  if(chart){
+    chart.destroy();
+  }
+
+  chart = new Chart(ctx, {
+
+    type:'line',
+
+    data:{
+
+      labels:labels,
+
+      datasets:[{
+
+        label:'Resistance (Ω)',
+
+        data:data,
+
+        borderColor:'#2563EB',
+
+        backgroundColor:'rgba(37,99,235,0.15)',
+
+        fill:true,
+
+        tension:0.4,
+
+        pointRadius:5,
+
+        borderWidth:3
+
+      }]
     },
 
-    options: {
+    options:{
 
-        responsive: true,
+      responsive:true,
 
-        plugins: {
+      plugins:{
 
-            legend: {
-                display: true,
-                position: 'top'
-            }
+        legend:{
+          display:true
+        }
 
+      },
+
+      scales:{
+
+        x:{
+          title:{
+            display:true,
+            text:'Probe Distance'
+          }
         },
 
-        scales: {
-
-            x: {
-
-                title: {
-                    display: true,
-                    text: 'Probe Distance'
-                }
-
-            },
-
-            y: {
-
-                title: {
-                    display: true,
-                    text: 'Resistance (Ohm)'
-                }
-
-            }
-
+        y:{
+          title:{
+            display:true,
+            text:'Resistance (Ω)'
+          }
         }
+
+      }
 
     }
 
-});
+  });
+
+}
+
+generateReport();
 
 </script>
 
