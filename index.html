@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<title>Fall of Potential Method Dashboard</title>
+
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com"></script>
+
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+  body {
+    font-family: Inter, sans-serif;
+    background: #F1F5F9;
+  }
+
+  .card {
+    background: white;
+    border-radius: 18px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+  }
+
+  .table-header {
+    background: #FACC15;
+    color: #111827;
+    font-weight: bold;
+  }
+
+  .value {
+    color: #1D4ED8;
+    font-weight: bold;
+  }
+</style>
+
+</head>
+
+<body>
+
+<div class="p-8">
+
+  <!-- HEADER -->
+  <div class="card bg-slate-900 text-white p-8 mb-6">
+
+    <h1 class="text-4xl font-bold">
+      Fall of Potential Method
+    </h1>
+
+    <p class="text-slate-300 mt-2 text-lg">
+      Earth Resistance of a Single Electrode
+    </p>
+
+  </div>
+
+  <!-- MAIN GRID -->
+  <div class="grid grid-cols-12 gap-6">
+
+    <!-- LEFT PANEL -->
+    <div class="col-span-3 space-y-6">
+
+      <!-- SITE INFORMATION -->
+      <div class="card p-5">
+
+        <h2 class="text-xl font-bold text-yellow-500 mb-5">
+          Site Information
+        </h2>
+
+        <div class="space-y-4">
+
+          <div>
+            <label class="text-sm text-gray-500">
+              Project Name
+            </label>
+
+            <input
+              type="text"
+              placeholder="Enter project name"
+              class="w-full border rounded-xl p-3 mt-1"
+            />
+          </div>
+
+          <div>
+            <label class="text-sm text-gray-500">
+              Location
+            </label>
+
+            <input
+              type="text"
+              placeholder="Enter location"
+              class="w-full border rounded-xl p-3 mt-1"
+            />
+          </div>
+
+          <div>
+            <label class="text-sm text-gray-500">
+              Date
+            </label>
+
+            <input
+              type="date"
+              class="w-full border rounded-xl p-3 mt-1"
+            />
+          </div>
+
+          <div>
+            <label class="text-sm text-gray-500">
+              Instrument
+            </label>
+
+            <input
+              type="text"
+              value="Megger DET4TD2"
+              class="w-full border rounded-xl p-3 mt-1"
+            />
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- UNIVERSAL INPUT -->
+      <div class="card p-5">
+
+        <h2 class="text-xl font-bold text-yellow-500 mb-5">
+          Universal Input
+        </h2>
+
+        <div class="space-y-4">
+
+          <div>
+            <label class="text-sm text-gray-500">
+              Distance Between Electrodes
+            </label>
+
+            <input
+              type="number"
+              value="660"
+              class="w-full border rounded-xl p-3 mt-1"
+            />
+          </div>
+
+          <div>
+            <label class="text-sm text-gray-500">
+              Desired Accuracy (%)
+            </label>
+
+            <input
+              type="number"
+              value="2"
+              class="w-full border rounded-xl p-3 mt-1"
+            />
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- 62% CHECK -->
+      <div class="card p-5">
+
+        <h2 class="text-xl font-bold text-yellow-500 mb-5">
+          62% Check
+        </h2>
+
+        <div class="space-y-4">
+
+          <div class="flex justify-between">
+            <span class="text-gray-500">
+              Distance
+            </span>
+
+            <span class="value">
+              409.2 m
+            </span>
+          </div>
+
+          <div class="flex justify-between">
+            <span class="text-gray-500">
+              Closest Resistance
+            </span>
+
+            <span class="value">
+              60 Ω
+            </span>
+          </div>
+
+          <div class="flex justify-between">
+            <span class="text-gray-500">
+              Equivalent Resistance
+            </span>
+
+            <span class="value">
+              61.288 Ω
+            </span>
+          </div>
+
+          <div class="flex justify-between items-center">
+            <span class="text-gray-500">
+              Status
+            </span>
+
+            <span class="bg-green-100 text-green-700 px-4 py-1 rounded-full font-bold text-sm">
+              PASS
+            </span>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- CENTER PANEL -->
+    <div class="col-span-6 space-y-6">
+
+      <!-- READING TABLE -->
+      <div class="card p-5">
+
+        <div class="flex justify-between items-center mb-5">
+
+          <h2 class="text-2xl font-bold text-yellow-500">
+            Reading Table
+          </h2>
+
+          <button class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-xl">
+            Export
+          </button>
+
+        </div>
+
+        <table class="w-full border-collapse overflow-hidden rounded-xl">
+
+          <thead>
+
+            <tr class="table-header">
+              <th class="p-4 text-left">Distance</th>
+              <th class="p-4 text-left">Voltage</th>
+              <th class="p-4 text-left">Current</th>
+              <th class="p-4 text-left">Resistance</th>
+            </tr>
+
+          </thead>
+
+          <tbody>
+
+            <tr class="border-b">
+              <td class="p-4">50 m</td>
+              <td class="p-4">440 V</td>
+              <td class="p-4">10 A</td>
+              <td class="p-4 font-bold text-blue-700">44 Ω</td>
+            </tr>
+
+            <tr class="border-b bg-slate-50">
+              <td class="p-4">100 m</td>
+              <td class="p-4">460 V</td>
+              <td class="p-4">10 A</td>
+              <td class="p-4 font-bold text-blue-700">46 Ω</td>
+            </tr>
+
+            <tr class="border-b">
+              <td class="p-4">150 m</td>
+              <td class="p-4">490 V</td>
+              <td class="p-4">10 A</td>
+              <td class="p-4 font-bold text-blue-700">49 Ω</td>
+            </tr>
+
+            <tr class="border-b bg-slate-50">
+              <td class="p-4">200 m</td>
+              <td class="p-4">520 V</td>
+              <td class="p-4">10 A</td>
+              <td class="p-4 font-bold text-blue-700">52 Ω</td>
+            </tr>
+
+            <tr class="border-b">
+              <td class="p-4">250 m</td>
+              <td class="p-4">540 V</td>
+              <td class="p-4">10 A</td>
+              <td class="p-4 font-bold text-blue-700">54 Ω</td>
+            </tr>
+
+            <tr class="border-b bg-slate-50">
+              <td class="p-4">300 m</td>
+              <td class="p-4">560 V</td>
+              <td class="p-4">10 A</td>
+              <td class="p-4 font-bold text-blue-700">56 Ω</td>
+            </tr>
+
+            <tr class="border-b">
+              <td class="p-4">350 m</td>
+              <td class="p-4">575 V</td>
+              <td class="p-4">10 A</td>
+              <td class="p-4 font-bold text-blue-700">57.5 Ω</td>
+            </tr>
+
+            <tr class="border-b bg-slate-50">
+              <td class="p-4">400 m</td>
+              <td class="p-4">600 V</td>
+              <td class="p-4">10 A</td>
+              <td class="p-4 font-bold text-blue-700">60 Ω</td>
+            </tr>
+
+            <tr class="border-b">
+              <td class="p-4">450 m</td>
+              <td class="p-4">670 V</td>
+              <td class="p-4">10 A</td>
+              <td class="p-4 font-bold text-blue-700">67 Ω</td>
+            </tr>
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+      <!-- GRAPH -->
+      <div class="card p-5">
+
+        <div class="flex justify-between items-center mb-5">
+
+          <h2 class="text-2xl font-bold text-yellow-500">
+            Resistance in Ohm
+          </h2>
+
+          <div class="bg-blue-100 text-blue-700 px-4 py-2 rounded-xl text-sm font-semibold">
+            Live Visualization
+          </div>
+
+        </div>
+
+        <div class="bg-slate-50 rounded-2xl p-4 border border-slate-200">
+
+          <canvas id="resistanceChart" height="120"></canvas>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- RIGHT PANEL -->
+    <div class="col-span-3 space-y-6">
+
+      <!-- SIMPLIFIED TEST -->
+      <div class="card p-5">
+
+        <h2 class="text-xl font-bold text-yellow-500 mb-5">
+          Simplified Potential Test
+        </h2>
+
+        <div class="space-y-4">
+
+          <div class="flex justify-between">
+            <span>R1</span>
+            <span class="value">56 Ω</span>
+          </div>
+
+          <div class="flex justify-between">
+            <span>R2</span>
+            <span class="value">54 Ω</span>
+          </div>
+
+          <div class="flex justify-between">
+            <span>R3</span>
+            <span class="value">60 Ω</span>
+          </div>
+
+          <div class="flex justify-between">
+            <span>Average RA</span>
+            <span class="value">56.66 Ω</span>
+          </div>
+
+        </div>
+
+        <div class="border-t mt-6 pt-6">
+
+          <div class="text-center">
+
+            <p class="text-gray-500">
+              Final Resistance
+            </p>
+
+            <h1 class="text-5xl font-bold text-blue-700 mt-2">
+              60 Ω
+            </h1>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- OUTPUT -->
+      <div class="card p-5">
+
+        <h2 class="text-xl font-bold text-yellow-500 mb-5">
+          Output Deviation
+        </h2>
+
+        <div class="space-y-4 text-sm">
+
+          <div class="flex justify-between">
+            <span>R1 Deviation</span>
+            <span>0.0117</span>
+          </div>
+
+          <div class="flex justify-between">
+            <span>R2 Deviation</span>
+            <span>0.0470</span>
+          </div>
+
+          <div class="flex justify-between">
+            <span>R3 Deviation</span>
+            <span>0.0588</span>
+          </div>
+
+          <div class="flex justify-between font-bold border-t pt-4">
+            <span>Accuracy</span>
+
+            <span class="text-green-600">
+              PASS
+            </span>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<!-- CHART SCRIPT -->
+<script>
+
+const ctx = document.getElementById('resistanceChart');
+
+new Chart(ctx, {
+
+    type: 'line',
+
+    data: {
+
+        labels: [
+            '50m',
+            '100m',
+            '150m',
+            '200m',
+            '250m',
+            '300m',
+            '350m',
+            '400m',
+            '450m'
+        ],
+
+        datasets: [{
+
+            label: 'Resistance (Ohm)',
+
+            data: [
+                44,
+                46,
+                49,
+                52,
+                54,
+                56,
+                57.5,
+                60,
+                67
+            ],
+
+            borderColor: '#2563EB',
+
+            backgroundColor: 'rgba(37,99,235,0.15)',
+
+            fill: true,
+
+            tension: 0.4,
+
+            pointBackgroundColor: '#1D4ED8',
+
+            pointBorderColor: '#ffffff',
+
+            pointRadius: 5,
+
+            borderWidth: 3
+
+        }]
+    },
+
+    options: {
+
+        responsive: true,
+
+        plugins: {
+
+            legend: {
+                display: true,
+                position: 'top'
+            }
+
+        },
+
+        scales: {
+
+            x: {
+
+                title: {
+                    display: true,
+                    text: 'Probe Distance'
+                }
+
+            },
+
+            y: {
+
+                title: {
+                    display: true,
+                    text: 'Resistance (Ohm)'
+                }
+
+            }
+
+        }
+
+    }
+
+});
+
+</script>
+
+</body>
+</html>
